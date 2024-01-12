@@ -1,0 +1,16 @@
+.bg-custom-color {
+    background-color: #FF0054;
+}
+
+.hover\:bg-custom-color-hover:hover {
+    background-color: #FF003D;
+}
+
+.focus\:border-custom-color-focus:focus {
+    border-color: #FF0072;
+    box-shadow: 0 0 0 2px #FF0072;
+}
+
+.focus\:ring-custom-color-ring:focus {
+    box-shadow: 0 0 0 3px rgba(255, 0, 84, 0.5);
+}
