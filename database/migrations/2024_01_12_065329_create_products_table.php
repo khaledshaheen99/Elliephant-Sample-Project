@@ -19,9 +19,9 @@ return new class extends Migration
             $table->decimal('price', 8, 2);
             $table->text('description');
             $table->string('feature_image')->nullable();
-            $table->json('gallery_image')->nullable();
+            $table->string('gallery_image')->nullable();
             $table->decimal('shipping_cost', 8, 2);
-            $table->enum('product_status', ['active', 'inactive'])->default('active');
+            $table->enum('product_status', ['available', 'out_of_stock'])->default('available');
             $table->timestamps();
         });
     }

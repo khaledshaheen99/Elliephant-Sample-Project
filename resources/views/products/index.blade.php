@@ -1,36 +1,50 @@
 @extends('layouts.app')
 
 @section('content')
-    <h2 class="text-2xl font-bold mb-4">Products</h2>
+    <div class="flex items-center justify-between mb-4">
+        <h2 class="text-2xl font-bold">Products</h2>
+        <a href="{{ route('products.create') }}" style="background-color: #FF0054; color: white;" class="px-4 py-2 rounded-full hover:bg-#FF003D focus:outline-none focus:border-#FF0072 focus:ring focus:ring-#FF0072">Add Product</a>
+    </div>
+    @if(session('success'))
+        <div class="alert alert-success">{{ session('success') }}</div>
+    @endif
 
-    <table class="min-w-full bg-white border border-gray-300">
-        <thead>
+    <table class="min-w-full divide-y divide-gray-200">
+        <thead class="bg-gray-50">
             <tr>
-                <th class="py-2 px-4 border-b">Name</th>
-                <th class="py-2 px-4 border-b">Price</th>
-                <th class="py-2 px-4 border-b">Description</th>
-                <th class="py-2 px-4 border-b">Actions</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">ID</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Price</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Description</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Feature Image</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Gallery Image</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Shipping Cost</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Product Status</th>
+                <th scope="col" class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody class="bg-white divide-y divide-gray-200">
             @foreach($products as $product)
                 <tr>
-                    <td class="py-2 px-4 border-b">{{ $product->name }}</td>
-                    <td class="py-2 px-4 border-b">{{ $product->price }}</td>
-                    <td class="py-2 px-4 border-b">{{ $product->description }}</td>
-                    <td class="py-2 px-4 border-b">
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->id }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->name }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->price }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->description }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap"><img src="{{ asset($product->feature_image) }}" alt="Feature Image" class="h-12"></td>
+                    <td class="px-6 py-4 whitespace-nowrap"><img src="{{ asset($product->gallery_image) }}" alt="Gallery Image" class="h-12"></td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->shipping_cost }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">{{ $product->product_status }}</td>
+                    <td class="px-6 py-4 whitespace-nowrap">
                         <a href="{{ route('products.edit', $product->id) }}" class="text-blue-500 hover:underline">Edit</a>
-                        <form action="{{ route('products.destroy', $product->id) }}" method="post" class="inline">
+                        <form action="{{ route('products.destroy', $product->id) }}" method="post" class="inline-block">
                             @csrf
                             @method('delete')
-                            <button type="submit" class="text-red-500 hover:underline ml-2">Delete</button>
+                            <button type="submit" class="text-red-500 hover:underline">Delete</button>
                         </form>
-                        <a href="{{ route('products.pdf', $product->id) }}" class="text-green-500 hover:underline ml-2">Generate PDF</a>
+                        <a href="{{ route('products.pdf', $product->id) }}" class="text-green-500 hover:underline">Generate PDF</a>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
-    <a href="{{ route('products.create') }}" class="mt-4 inline-block bg-blue-500 text-white py-2 px-4 rounded-full">Add Product</a>
 @endsection

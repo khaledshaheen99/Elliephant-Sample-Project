@@ -16,6 +16,10 @@ use App\Http\Controllers\ProductController;
 */
 
 Route::middleware(['web'])->group(function () {
+    Route::get('/', function () {
+        return redirect()->route('login');
+    });
+    
     // Authentication routes
     Route::get('/login', [AuthController::class, 'showLoginForm'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);

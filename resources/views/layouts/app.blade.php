@@ -8,7 +8,7 @@
 </head>
 <body class="font-sans antialiased">
     <div class="min-h-screen bg-gray-100">
-        <div class="bg-blue-500 p-4 text-white">
+        <div style="background-color: #FF0054; color: white;" class="bg-blue-500 p-4 text-white">
             <div class="container mx-auto flex justify-between items-center">
                 <span class="text-lg font-bold">Elliephant</span>
                 <form action="{{ route('logout') }}" method="post">
